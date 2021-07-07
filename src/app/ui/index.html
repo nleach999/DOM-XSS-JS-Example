@@ -1,0 +1,49 @@
+<HTML>
+    <HEAD>
+        <script type="text/javascript" src="/js/test.js"></script>
+
+    </HEAD>
+    <BODY>
+        <DIV>
+            <button onclick="clr()">Clear Outputs</button>
+            <button onclick="document.location='/'">Clear URL Script</button>
+        </DIV>
+        <DIV>
+            <DIV>
+                <BR>
+                    <H1>Demo XSS with JSON.parse of window.location.href</H1>
+                    <P>
+                      <a href="?val=%7B%22foo%22%20%3A%20%22%3Cimg%20src%3D%27foo.jpg%27%20onerror%3D%27alert(%5C%22This%20is%20an%20injection%20script%20in%20JSON%20that%20gets%20through%20JSON.parse.%5C%22)%27%2F%3E%22%2C%0A%20%22bar%22%20%3A%20%22%3Cimg%20src%3D%27foo.jpg%27%20onerror%3D%27alert(%5C%22And%20it%20can%20be%20in%20multiple%20elements.%5C%22)%27%2F%3E%22%7D%0A">Click to add a JSON document with a script in the URL</a>
+                    </P>
+                    <P>
+                        <a
+                            href="?tst=%5B%7B%22foo%22%20%3A%20%22%3Cimg%20src%3D%27foo.jpg%27%20onerror%3D%27alert(%5C%22This%20is%20an%20injection%20script%20in%20JSON%20that%20gets%20through%20JSON.parse.%5C%22)%27%2F%3E%22%7D%2C%0A%20%7B%22bar%22%20%3A%20%22%3Cimg%20src%3D%27foo.jpg%27%20onerror%3D%27alert(%5C%22And%20it%20can%20be%20in%20multiple%20elements.%5C%22)%27%2F%3E%22%2C%20%22baz%22%3A%20%22%3Cimg%20src%3D%5C%22none.job%5C%22%20onerror%3D%27alert(1)%27%2F%3E%22%7D%5D%0A">Click
+                            to add a JSON array with a script in the URL</a>
+                    </P>
+                    <button onclick="clik_JSON_TP()">Demo XSS with JSON as URL Parameter</button>
+            </DIV>
+        </DIV>
+
+            <DIV>
+                <BR>
+                <H1>Demo XSS with raw insert of window.location.href</H1>
+                <P><a href='?val=<img%20src%3D"none.jpg"%20onerror%3D"alert(%27This%20is%20vulnerable%27)"%20%2F>'>Click to add a script in the URL</a></P>
+                <P><a href='?val=%3Cimg%20src%3D%22none.jpg%22%20onerror%3D%27%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D%5B(%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D)%5B%2B!%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B(%5B%5D%5B%5B%5D%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(%5B%5D%5B%5B%5D%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D)%5B%2B!%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%5D((!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%2B%5B!%2B%5B%5D%2B!%2B%5B%5D%2B!%2B%5B%5D%5D%5D%2B%5B%2B!%2B%5B%5D%5D%2B(%5B%2B%5B%5D%5D%2B!%5B%5D%2B%5B%5D%5B(!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%5D%2B(!%5B%5D%2B%5B%5D)%5B%2B!%2B%5B%5D%5D%2B(!!%5B%5D%2B%5B%5D)%5B%2B%5B%5D%5D%5D)%5B!%2B%5B%5D%2B!%2B%5B%5D%2B%5B%2B%5B%5D%5D%5D)()%27%20%2F%3E%0A'>Click to add a 6-char hidden script to the URL</a></P>
+                <button onclick="clik_url_XSS_FN()">Demo XSS False Negative Flow</button>
+                <button onclick="clik_url_XSS_TP()">Demo XSS True Positive Flow</button>
+            </DIV>
+        </DIV>
+        <DIV>
+            <H1>Unescaped data</H1>
+            <DIV id="raw"></DIV>
+        </DIV>
+        <DIV>
+            <H1>Escaped Data</H1>
+           <DIV id="escaped"></DIV>
+        </DIV>
+        <DIV>
+            <H1>Encoded Data</H1>
+           <DIV id="encoded"></DIV>
+        </DIV>
+    </BODY>
+</HTML>
