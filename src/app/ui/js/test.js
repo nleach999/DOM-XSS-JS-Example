@@ -29,7 +29,7 @@ function clik_url_XSS_TP() {
 }
 
 function clik_JSON_TP() {
-    var url = new URL(window.location.href);
+    var url = "";
 
     url.searchParams.forEach((v, k) => {
 
